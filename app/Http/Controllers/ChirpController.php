@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Chirp;
 use App\Http\Requests\StoreChirpRequest;
 use App\Http\Requests\UpdateChirpRequest;
+use App\Models\Chirp;
 
 class ChirpController extends Controller
 {
@@ -29,7 +29,19 @@ class ChirpController extends Controller
      */
     public function store(StoreChirpRequest $request)
     {
-        //
+        $validated = $request->validate([
+            'message' => [
+                'required',
+                'string',
+                'max:255',
+                'min:1',
+                ],
+        ]);
+
+        $request->user()->chirps()->create($validated);
+
+        return redirect(route('chirps.index'));
+
     }
 
     /**
