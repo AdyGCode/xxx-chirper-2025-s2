@@ -6,6 +6,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StaticPageController;
 use Illuminate\Support\Facades\Route;
 
+use \App\Http\Controllers\ChirpController;
+
 Route::get('/', [StaticPageController::class, 'home'])
     ->name('home');
 
@@ -32,5 +34,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
 });
+
+// /chirps      GET     ChirpController index method
+// /chirps      POST    ChirpController store method
+Route::resource('chirps', ChirpController::class)
+    ->only(['index', 'store'])
+    ->middleware(['auth','verified']);
+
 
 require __DIR__.'/auth.php';
