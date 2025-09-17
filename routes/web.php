@@ -37,17 +37,17 @@ Route::middleware('auth')->group(function () {
 
 // /chirps      GET     ChirpController index method
 // /chirps      POST    ChirpController store method
-//Route::resource('/chirps', ChirpController::class)
-//    ->only(['index', 'store'])
-//    ->middleware(['auth','verified']);
+Route::resource('/chirps', ChirpController::class)
+    ->only(['index', 'store'])
+    ->middleware(['auth','verified']);
 
-Route::get('/chirps', [ChirpController::class, 'index'])
-    ->name('chirps.index')
-    -> middleware(['auth']);
-
-Route::post('/chirps', [ChirpController::class, 'store'])
-    ->name('chirps.store')
-    -> middleware(['auth']);
+//Route::get('/chirps', [ChirpController::class, 'index'])
+//    ->name('chirps.index')
+//    -> middleware(['auth']);
+//
+//Route::post('/chirps', [ChirpController::class, 'store'])
+//    ->name('chirps.store')
+//    -> middleware(['auth']);
 
 
 require __DIR__.'/auth.php';
