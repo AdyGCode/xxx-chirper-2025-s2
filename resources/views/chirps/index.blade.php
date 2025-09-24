@@ -29,7 +29,7 @@
                                fa-shake
                                text-3xl text-blue-400"
                         style="--fa-animation-duration: 2s;
-                               --fa-animation-iteration-count: 3;
+                               --fa-animation-iteration-count: 2;
                                --fa-animation-timing: ease-in-out;"
                         aria-hidden="true"></i>
                     <div class="flex-1">
