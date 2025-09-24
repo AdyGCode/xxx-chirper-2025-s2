@@ -39,7 +39,7 @@ class Chirp extends Model
     }
 
     /**
-     * A User has zero or more Chirps
+     * A Chirp belongs to a User
      *
      * @return BelongsTo
      */
@@ -48,4 +48,4 @@ class Chirp extends Model
         return $this->belongsTo(User::class);
     }
 
-}
+} // end class Chirp

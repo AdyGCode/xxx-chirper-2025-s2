@@ -15,17 +15,8 @@ class ChirpController extends Controller
     {
         $chirps = Chirp::with('user')->latest()->get();
 
-
         return view('chirps.index')
-            ->with('chirps',$chirps);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+            ->with('chirps', $chirps);
     }
 
     /**
@@ -38,7 +29,7 @@ class ChirpController extends Controller
                 'required',
                 'string',
                 'max:255',
-                'min:1',
+                'min:5',
                 ],
         ]);
 
