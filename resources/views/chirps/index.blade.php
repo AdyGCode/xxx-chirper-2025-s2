@@ -8,9 +8,9 @@
 
             <x-textarea name="message" id="Message"
                         placeholder="{{ __('What\'s on your mind') }}?"
-                        :message="old('message')" />
+                        :message="old('message')"/>
 
-            <x-input-error :messages="$errors->get('message')" class="mt-2" rows="10" />
+            <x-input-error :messages="$errors->get('message')" class="mt-2" rows="10"/>
 
             <x-primary-button class="mt-4">{{ __('Chirp') }}</x-primary-button>
 
@@ -18,7 +18,7 @@
 
 
         <div class="mt-6 bg-white shadow-sm
-			rounded-lg divide-y">
+			        rounded-lg divide-y">
 
             @foreach ($chirps as $chirp)
 
@@ -26,20 +26,20 @@
 
                     <i
                         class="fa-regular fa-comment-dots
-	              fa-shake
-	              text-xl text-blue-400"
+                               fa-shake
+                               text-3xl text-blue-400"
                         style="--fa-animation-duration: 2s;
-                   --fa-animation-iteration-count: 2;
-                  --fa-animation-timing: ease-in-out;"
+                               --fa-animation-iteration-count: 2;
+                               --fa-animation-timing: ease-in-out;"
                         aria-hidden="true"></i>
                     <div class="flex-1">
                         <div class="flex justify-between items-center">
                             <div>
-                <span class="text-gray-800">
-                {{ $chirp->user->name }}
-                </span>
+                                <span class="text-gray-800">
+                                {{ $chirp->user->name }}
+                                </span>
                                 <small class="ml-2
-			                 text-sm text-gray-600">
+			                                  text-sm text-gray-600">
                                     {{ $chirp->created_at->format('j M Y, g:i a') }}
                                 </small>
                             </div>
