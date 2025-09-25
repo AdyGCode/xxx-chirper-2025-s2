@@ -30,7 +30,7 @@ class ChirpController extends Controller
                 'string',
                 'max:255',
                 'min:5',
-                ],
+            ],
         ]);
 
         $request->user()->chirps()->create($validated);
@@ -52,7 +52,8 @@ class ChirpController extends Controller
      */
     public function edit(Chirp $chirp)
     {
-        //
+        return view('chirps.edit')
+            ->with('chirp', $chirp);
     }
 
     /**
@@ -60,7 +61,18 @@ class ChirpController extends Controller
      */
     public function update(UpdateChirpRequest $request, Chirp $chirp)
     {
-        //
+        $validated = $request->validate([
+            'message' => [
+                'required',
+                'string',
+                'min:5',
+                'max:255',
+            ],
+        ]);
+
+        $chirp->update($validated);
+
+        return redirect(route('chirps.index'));
     }
 
     /**
@@ -68,6 +80,7 @@ class ChirpController extends Controller
      */
     public function destroy(Chirp $chirp)
     {
-        //
+        $chirp->delete();
+        return redirect(route('chirps.index'));
     }
 }

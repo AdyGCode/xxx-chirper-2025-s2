@@ -50,7 +50,7 @@ Route::middleware('auth')->group(function () {
  * | DELETE     |  /chirps/{chirp}           |  destroy  |  chirps.destroy      |
  */
 Route::resource('/chirps', ChirpController::class)
-    ->only(['index', 'store', ])
+    ->only(['index', 'store', 'edit', 'update', 'destroy'])
     ->middleware(['auth','verified']);
 
 //Route::get('/chirps', [ChirpController::class, 'index'])
