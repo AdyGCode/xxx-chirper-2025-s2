@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreChirpRequest;
 use App\Http\Requests\UpdateChirpRequest;
 use App\Models\Chirp;
+use Illuminate\Http\Request;
 
 class ChirpController extends Controller
 {
@@ -14,6 +15,11 @@ class ChirpController extends Controller
     public function index()
     {
         $chirps = Chirp::with('user')->latest()->get();
+
+//        $chirps = Chirp::with('user')
+//            ->where('user_id','=',auth()->id())
+//            ->latest()
+//            ->get();
 
         return view('chirps.index')
             ->with('chirps', $chirps);
@@ -54,6 +60,8 @@ class ChirpController extends Controller
     {
         return view('chirps.edit')
             ->with('chirp', $chirp);
+
+//        return view('chirps.edit', compact(['chirp']) );
     }
 
     /**
