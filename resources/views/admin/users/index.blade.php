@@ -10,8 +10,14 @@
             <h3 class="text-2xl font-bold text-zinc-700">
                 Users
             </h3>
+            <p>
+                <a href="{{ route('admin.users.create') }}">
+                    New User
+                </a>
+            </p>
+
         </header>
-        <div class="flex flex-1 w-full max-h-min overflow-x-auto">
+
             <table class="min-w-full divide-y-2 divide-gray-200 bg-gray-50">
                 <thead class="sticky top-0 bg-zinc-700 ltr:text-left rtl:text-right">
                 <tr class="*:font-medium *:text-white">
@@ -36,25 +42,28 @@
                             </span>
                         </td>
                         <td class="px-3 py-1 whitespace-nowrap w-1/6">
-                            Suspended
+                            <span class="text-xs rounded-full bg-gray-700 p-0.5 px-2 text-gray-200">
+                                suspended
+                            </span>
                         </td>
-                        <td class="px-3 py-1 whitespace-nowrap w-1/8">
-                            <form action="{{ route('admin.users', $user) }}"
+                        <td class="px-3 py-1 whitespace-nowrap w-1/4">
+                            <form action="{{ route('admin.users.destroy', $user) }}"
                                   method="post"
-                            class="grid grid-cols-3 gap-2 w-full">
+                                  class="grid grid-cols-3 gap-2 w-full">
                                 @csrf
                                 @method('delete')
 
-                                <a href="{{ route('admin.users', $user) }}"
+                                <a href="{{ route('admin.users.show', $user) }}"
                                    class="hover:text-green-500 transition border p-2 text-center rounded">
                                     <i class="fa-solid fa-user-tag"></i>
                                 </a>
 
-                                <a href="{{ route('admin.users', $user) }}"
+                                <a href="{{ route('admin.users.edit', $user) }}"
                                    class="hover:text-blue-500 transition border p-2 text-center rounded">
                                     <i class="fa-solid fa-user-cog"></i>
                                 </a>
-                                <button type="submit" class="hover:text-red-500 transition border p-2 text-center rounded">
+                                <button type="submit"
+                                        class="hover:text-red-500 transition border p-2 text-center rounded">
                                     <i class="fa-solid fa-user-slash"></i>
                                 </button>
                             </form>
@@ -66,14 +75,13 @@
 
                 <tfoot>
                 <tr>
-                   <td colspan="4" class="p-3">
-                       {{ $users->onEachSide(2)->links("vendor.pagination.tailwind") }}
-                   </td>
+                    <td colspan="4" class="p-3">
+                        Pagination here...
+{{--                        {{ $users->onEachSide(2)->links("vendor.pagination.tailwind") }}--}}
+                    </td>
                 </tr>
                 </tfoot>
             </table>
-        </div>
-
 
     </section>
 

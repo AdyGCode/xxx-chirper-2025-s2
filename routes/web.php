@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StaticPageController;
@@ -23,7 +24,9 @@ Route::middleware(['auth', 'verified'])
         Route::get('/', [AdminController::class, 'index'])
             ->name('index');
 
-        Route::get('users', [AdminController::class, 'users'])->name('users');
+        Route::resource('users',
+            UserManagementController::class);
+        //        Route::get('users', [UserManagementController::class, 'index'])->name('users');
     });
 
 Route::middleware('auth')->group(function () {
