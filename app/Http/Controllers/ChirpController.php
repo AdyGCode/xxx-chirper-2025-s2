@@ -17,6 +17,11 @@ class ChirpController extends Controller
     {
         $chirps = Chirp::with('user')->latest()->get();
 
+//        $chirps = Chirp::with('user')
+//            ->where('user_id','=',auth()->id())
+//            ->latest()
+//            ->get();
+
         return view('chirps.index')
             ->with('chirps', $chirps);
     }
@@ -58,6 +63,8 @@ class ChirpController extends Controller
 
         return view('chirps.edit')
             ->with('chirp', $chirp);
+
+//        return view('chirps.edit', compact(['chirp']) );
     }
 
     /**
