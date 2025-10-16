@@ -30,7 +30,8 @@ class UserManagementController extends Controller
             'LIKE',
             "%$search%"
         )
-            ->paginate(10);
+            ->paginate(10)
+            ->appends(['search' => $search]);
 
         return view('admin.users.index')
             ->with('users', $users)
