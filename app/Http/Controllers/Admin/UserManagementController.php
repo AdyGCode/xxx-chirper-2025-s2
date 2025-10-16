@@ -164,17 +164,25 @@ class UserManagementController extends Controller
                         'position' => 'top-center',
                         'timeout' => 5000,
                     ],
-                    'User Creation Failed');
+                    'User Update Failed');
 
             return back()->withErrors($e->validator)->withInput();
 
         }
+
+        $userName = $user->name;
+
+        flash()
+            ->option('position', 'top-center')
+            ->option('timeout', 5000)
+            ->success("User $userName updated successfully!", [], "User Updated");
+
         return redirect(route('admin.users.index'));
 
     }
 
     /**
-     * Confirmn removal of the User resource from storage.
+     * Confirm removal of the User resource from storage.
      */
     public function delete(User $user)
     {
@@ -187,7 +195,15 @@ class UserManagementController extends Controller
      */
     public function destroy(User $user)
     {
+        $userName = $user->name;
+
         $user->delete();
+
+        flash()
+            ->option('position', 'top-center')
+            ->option('timeout', 5000)
+            ->success("User $userName deleted successfully!", [], "User Deleted");
+
         return redirect(route('admin.users.index'));
     }
 }
