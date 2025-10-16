@@ -1,12 +1,11 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StaticPageController;
 use Illuminate\Support\Facades\Route;
-
-use \App\Http\Controllers\ChirpController;
 
 Route::get('/', [StaticPageController::class, 'home'])
     ->name('home');
@@ -51,7 +50,7 @@ Route::middleware('auth')->group(function () {
  */
 Route::resource('/chirps', ChirpController::class)
     ->only(['index', 'store', 'edit', 'update', 'destroy'])
-    ->middleware(['auth','verified']);
+    ->middleware(['auth', 'verified']);
 
 //Route::get('/chirps', [ChirpController::class, 'index'])
 //    ->name('chirps.index')
@@ -61,5 +60,10 @@ Route::resource('/chirps', ChirpController::class)
 //    ->name('chirps.store')
 //    -> middleware(['auth']);
 
+Route::prefix('admin')
+    ->middleware(['auth',])
+    ->group(function () {
+        Route::resource('users', UserManagementController::class);
+    });
 
 require __DIR__.'/auth.php';
