@@ -19,9 +19,9 @@
         </header>
 
         <article class="flex flex-col text-neutral-800 block border border-neutral-300 shadow-sm  bg-white">
-            <header class="bg-neutral-800 text-neutral-50 text-lg px-4 py-2">
+            <header class="bg-red-800 text-neutral-50 text-lg px-4 py-2">
                 <h5>
-                    {{ __('Details for') }}
+                    {{ __('Confirm Delete User') }}
                     <em>{{ $user->name }}</em>
                 </h5>
             </header>
@@ -96,33 +96,34 @@
                     </dl>
                 </div>
 
-                <footer class="mt-4 bg-neutral-200 -m-4 p-2 px-4">
+                <footer class="mt-4 gap-4 flex bg-neutral-200 -m-4 p-2 px-4">
 
-                    <form action="{{ route('admin.users.delete', $user) }}"
+                    <form action="{{ route('admin.users.destroy', $user) }}"
                           method="post"
                           class="flex flex-row gap-4 w-full">
                         @csrf
+                        @method('delete')
 
-                        <x-primary-link-button
-                            class="hover:bg-blue-800! flex gap-2"
-                            href="{{ route('admin.users.index', $user) }}">
-                            <i class="fa-solid fa-users"></i>
-                            All Users
-                        </x-primary-link-button>
+                    <x-primary-link-button
+                        class="hover:bg-blue-800! flex-row gap-2"
+                        href="{{ route('admin.users.index') }}">
+                        <i class="fa-solid fa-users"></i>
+                        All Users
+                    </x-primary-link-button>
 
-                        <x-primary-link-button
-                            class="bg-neutral-700 hover:bg-yellow-700 flex gap-2"
-                            href="{{ route('admin.users.edit', $user) }}">
-                            <i class="fa-solid fa-user-cog"></i>
-                            Edit
-                        </x-primary-link-button>
+                    <x-primary-link-button
+                        class="bg-neutral-700 hover:bg-green-800! flex-row gap-2"
+                        href="{{ route('admin.users.show', $user) }}">
+                        <i class="fa-solid fa-user"></i>
+                        Show User
+                    </x-primary-link-button>
 
-                        <x-secondary-button
-                            type="submit"
-                            class="hover:bg-red-800 hover:text-white! flex gap-2">
-                            <i class="fa-solid fa-user-slash"></i>
-                            Delete
-                        </x-secondary-button>
+                    <x-secondary-button
+                        type="submit"
+                        class="hover:bg-red-800 hover:text-white flex-row gap-2">
+                        <i class="fa-solid fa-times-circle text-lg"></i>
+                        Delete
+                    </x-secondary-button>
 
                     </form>
 

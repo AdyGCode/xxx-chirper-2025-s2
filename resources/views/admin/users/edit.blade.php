@@ -21,34 +21,39 @@
         <article class="flex flex-col text-neutral-800 border border-neutral-300 shadow-sm  bg-white">
             <header class="bg-neutral-800 text-neutral-50 text-lg px-4 py-2">
                 <h5>
-                    {{ __('Create New User') }}
+                    {{ __('Edit User Details') }}
                 </h5>
             </header>
 
             <section class="p-4">
                 <form method="POST"
                       class="sm:gap-4 lg:gap-6 w-full"
-                      action="{{ route('admin.users.store') }}">
+                      action="{{ route('admin.users.update', $user) }}">
 
                     @csrf
+                    @method("PATCH")
 
 
                     <div class="w-full mt-4 sm:mt-0 flex flex-col space-y-2  text-neutral-700">
 
                         <x-input-label for="Name">
-                            {{__("Name")}}
+                            {{ __("Name") }}
                         </x-input-label>
-                        <x-text-input type="text" id="Name" name="name"/>
+                        <x-text-input type="text" id="Name"
+                                      name="name"
+                                      :value="old('name') ?? $user->name "/>
                         <x-input-error :messages="$errors->get('name')" class="mt-2"/>
 
                         <x-input-label for="Email">
-                            {{__("Email")}}
+                            {{ __("Email") }}
                         </x-input-label>
-                        <x-text-input type="text" id="Email" name="email"/>
+                        <x-text-input type="text" id="Email"
+                                      name="email"
+                                      :value="old('email') ?? $user->email"/>
                         <x-input-error :messages="$errors->get('email')" class="mt-2"/>
 
                         <x-input-label for="Role">
-                            {{__("Role")}}
+                            {{ __("Role") }}
                         </x-input-label>
                         <select id="Role" name="role">
                             <option>No Roles Provided</option>
@@ -56,7 +61,7 @@
                         <x-input-error :messages="$errors->get('role')" class="mt-2"/>
 
                         <x-input-label for="Status">
-                            {{__("Status")}}
+                            {{ __("Status") }}
                         </x-input-label>
                         <select id="Status" name="status">
                             <option>No Status Provided</option>
@@ -65,15 +70,17 @@
 
 
                         <x-input-label for="Password">
-                            {{__("Password")}}
+                            {{ __("Password") }}
                         </x-input-label>
-                        <x-text-input type="password" id="Password" name="password"/>
+                        <x-text-input type="password" id="Password" name="password" value=""/>
                         <x-input-error :messages="$errors->get('password')" class="mt-2"/>
 
                         <x-input-label for="PasswordConfirmation">
-                            {{__("Password Confirmation")}}
+                            {{ __("Password Confirmation") }}
                         </x-input-label>
-                        <x-text-input type="password" id="PasswordConfirmation" name="password_confirmation"/>
+                        <x-text-input type="password" id="PasswordConfirmation"
+                                      name="password_confirmation"
+                                      value=""/>
                         <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2"/>
 
 

@@ -24,6 +24,9 @@ Route::middleware(['auth', 'verified'])
         Route::get('/', [AdminController::class, 'index'])
             ->name('index');
 
+        Route::post('users/{user}/delete', [UserManagementController::class, 'delete'])
+            ->name('users.delete');
+
         Route::resource('users',
             UserManagementController::class);
         //        Route::get('users', [UserManagementController::class, 'index'])->name('users');

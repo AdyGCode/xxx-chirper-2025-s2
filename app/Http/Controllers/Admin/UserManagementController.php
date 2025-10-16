@@ -8,6 +8,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
 class UserManagementController extends Controller
@@ -42,7 +43,7 @@ class UserManagementController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'min:2', 'max:192',],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Password::defaults()],
             'role' => ['nullable',],
         ]);
@@ -83,7 +84,53 @@ class UserManagementController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        // TODO: Update when we add Roles & Permissions
+        $validated = $request->validate([
+            'name' => ['required', 'min:2', 'max:192',],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique(User::class)->ignore($user),
+            ],
+            'password' => [
+                'sometimes',
+                'nullable',
+                'confirmed',
+                Password::defaults()
+            ],
+            'role' => ['nullable',],
+        ]);
+
+        // Remove password if null
+        if (is_null($validated['password'])) {
+            unset($validated['password']);
+        }
+
+        $user->fill($validated);
+
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
+        }
+
+        $user->save();
+
+        if (is_null($user->email_verified_at)) {
+            $user->sendEmailVerificationNotification();
+        }
+
+        return redirect(route('admin.users.index'));
+
+    }
+
+    /**
+     * Confirmn removal of the User resource from storage.
+     */
+    public function delete(User $user)
+    {
+        return view('admin.users.delete')
+            ->with('user', $user);
     }
 
     /**
@@ -91,6 +138,7 @@ class UserManagementController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect(route('admin.users.index'));
     }
 }
