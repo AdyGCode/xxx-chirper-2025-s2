@@ -21,10 +21,17 @@
                 />
 
                 <x-primary-button type="submit"
-                        class="px-4 py-1">
+                                  class="px-4 py-1">
                     <i class="fa-solid fa-search text-md"></i>
                     <span class="sr-only">Search</span>
                 </x-primary-button>
+
+
+                <x-primary-link-button
+                    href="{{ route('admin.users.index') }}"
+                    class=" hover:bg-blue-800!">
+                    Reset
+                </x-primary-link-button>
 
             </form>
 
@@ -92,8 +99,7 @@
             <tfoot>
             <tr>
                 <td colspan="4" class="p-3">
-                    Pagination here...
-                    {{--                        {{ $users->onEachSide(2)->links("vendor.pagination.tailwind") }}--}}
+                    {{ $users->onEachSide(2)->links("vendor.pagination.tailwind") }}
                 </td>
             </tr>
             </tfoot>
