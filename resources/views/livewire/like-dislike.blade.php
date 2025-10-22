@@ -4,13 +4,13 @@
             <a wire:click="like()" class="cursor-pointer">
                 <i class="fa-solid fa-thumbs-up"></i>
             </a>
-            0
+            {{ $likes }}
         </div>
         <div class="flex">
             <a wire:click="dislike()" class="cursor-pointer">
                 <i class="fa-solid fa-thumbs-down"></i>
             </a>
-            0
+            {{ $dislikes }}
         </div>
     </div>
 </div>

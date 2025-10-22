@@ -24,8 +24,10 @@ class ChirpController extends Controller
 //            ->get();
 
         $chirps = Chirp::with('userVotes')
-            ->withCount(['votes as likesCount' => fn(Builder $query) => $query->where('vote', '>', 0)], 'vote')
-            ->withCount(['votes as dislikesCount' => fn(Builder $query) => $query->where('vote', '<', 0)], 'vote')
+            ->withCount([
+                'votes as likesCount' => fn(Builder $query) => $query->where('vote', '>', 0)], 'vote')
+            ->withCount([
+                'votes as dislikesCount' => fn(Builder $query) => $query->where('vote', '<', 0)], 'vote')
             ->latest()
             ->paginate();
 

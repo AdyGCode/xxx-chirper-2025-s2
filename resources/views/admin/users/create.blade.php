@@ -38,14 +38,16 @@
                         <x-input-label for="Name">
                             {{__("Name")}}
                         </x-input-label>
-                        <x-text-input type="text" id="Name" name="name" :value="old('name')??''" />
+                        <x-text-input type="text" id="Name" name="name" :value="old('name')??''"/>
                         <x-input-error :messages="$errors->get('name')" class="mt-2"/>
+
 
                         <x-input-label for="Email">
                             {{__("Email")}}
                         </x-input-label>
-                        <x-text-input type="text" id="Email" name="email"  :value="old('email')??''" />
+                        <x-text-input type="text" id="Email" name="email" :value="old('email')??''"/>
                         <x-input-error :messages="$errors->get('email')" class="mt-2"/>
+
 
                         <x-input-label for="Role">
                             {{__("Role")}}
@@ -54,6 +56,7 @@
                             <option>No Roles Provided</option>
                         </select>
                         <x-input-error :messages="$errors->get('role')" class="mt-2"/>
+
 
                         <x-input-label for="Status">
                             {{__("Status")}}
@@ -69,6 +72,7 @@
                         </x-input-label>
                         <x-text-input type="password" id="Password" name="password"/>
                         <x-input-error :messages="$errors->get('password')" class="mt-2"/>
+
 
                         <x-input-label for="PasswordConfirmation">
                             {{__("Password Confirmation")}}

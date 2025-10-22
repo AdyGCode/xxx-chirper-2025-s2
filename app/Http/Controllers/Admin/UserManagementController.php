@@ -25,11 +25,12 @@ class UserManagementController extends Controller
 
         $search = $validated['search'] ?? '';
 
-        $users = User::whereAny(
-            ['name', 'email', 'position',],
-            'LIKE',
-            "%$search%"
-        )
+//        $users = User::where('name', 'LIKE', "%$search%")
+//            ->orWhere('email', 'LIKE', "%$search%")
+//            ->orWhere('position', 'LIKE', "%$search%")
+//            ->paginate(10);
+
+        $users = User::whereAny(['name', 'email', 'position',], 'LIKE', "%$search%")
             ->paginate(10)
             ->appends(['search' => $search]);
 
@@ -58,7 +59,7 @@ class UserManagementController extends Controller
         try {
             $validated = $request->validate([
                 'name' => ['required', 'min:2', 'max:192',],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class.',email'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class . ',email'],
                 'password' => ['required', 'confirmed', Password::defaults()],
                 'role' => ['nullable',],
             ]);
