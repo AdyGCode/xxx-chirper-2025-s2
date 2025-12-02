@@ -41,6 +41,7 @@ class LikeDislike extends Component
      */
     public int $dislikes = 0;
 
+
     /**
      * Mount (Activate) the component
      *
@@ -55,8 +56,9 @@ class LikeDislike extends Component
         $this->chirp = $chirp;
         $this->userVote = $chirp->userVotes;
         $this->lastUserVote = $this->userVote->vote ?? 0;
-        $this->likes = $chirp->likesCount;
-        $this->dislikes = $chirp->dislikesCount;
+        
+        $this->likes = $chirp->likesCount ?? 0;
+        $this->dislikes = $chirp->dislikesCount ?? 0;
     }
 
     /**
