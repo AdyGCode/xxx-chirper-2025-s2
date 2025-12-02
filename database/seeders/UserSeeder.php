@@ -75,6 +75,94 @@ class UserSeeder extends Seeder
                 'roles' => ['client'],
                 'permissions' => [],
             ],
+            [
+                'name' => 'Crystal Chantel-Leer',
+                'email' => 'crystal@example.com',
+                'password' => 'Password1',
+                'email_verified_at' => now(),
+                'roles' => ['client'],
+                'permissions' => [],
+            ],
+
+            [
+                'name' => 'Eileen Dover',
+                'email' => 'eileen@example.com',
+                'password' => 'Password1',
+                'email_verified_at' => null,
+                'roles' => ['client'],
+                'permissions' => [],
+            ],
+
+            [
+                'name' => 'Mjr Annie Flatt',
+                'email' => 'annie@example.com',
+                'password' => 'Password1',
+                'email_verified_at' => null,
+                'roles' => ['client'],
+                'permissions' => [],
+            ],
+            [
+                'name' => "Jacques d'Carre",
+                'email' => 'jacques@example.com',
+                'password' => 'Password1',
+                'email_verified_at' => now(),
+                'roles' => ['client'],
+                'permissions' => [],
+            ],
+
+            [
+                'name' => 'Ivanna Winn',
+                'email' => 'ivanna@example.com',
+                'password' => 'Password1',
+                'email_verified_at' => null,
+                'roles' => ['client'],
+                'permissions' => [],
+            ],
+
+            [
+                'name' => 'Roly Decks',
+                'email' => 'roly@example.com',
+                'password' => 'Password1',
+                'email_verified_at' => null,
+                'roles' => ['client'],
+                'permissions' => [],
+            ],
+
+            [
+                'name' => "Parker d'Carre",
+                'email' => 'parker@example.com',
+                'password' => 'Password1',
+                'email_verified_at' => now(),
+                'roles' => ['client'],
+                'permissions' => [],
+            ],
+
+            [
+                'name' => "Rolly d'Carre",
+                'email' => 'rolly@example.com',
+                'password' => 'Password1',
+                'email_verified_at' => null,
+                'roles' => ['client'],
+                'permissions' => [],
+            ],
+
+            [
+                'name' => 'Anita Bathe',
+                'email' => 'anita@example.com',
+                'password' => 'Password1',
+                'email_verified_at' => null,
+                'roles' => ['client'],
+                'permissions' => [],
+            ],
+
+            [
+                'name' => "Paige Turner",
+                'email' => 'paige@example.com',
+                'password' => 'Password1',
+                'email_verified_at' => null,
+                'roles' => ['client'],
+                'permissions' => [],
+            ],
         ];
 
         // Remember to Import the DB class using "use Illuminate\Support\Facades\DB;"
@@ -90,7 +178,7 @@ class UserSeeder extends Seeder
             unset($newUser['permissions']);
 
             $user = User::updateOrCreate(
-                ['id' => $newUser['id']],
+                ['id' => $newUser['id']??null],
                 $newUser
             );
 

@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateChirpRequest;
 use App\Models\Chirp;
 use Illuminate\Http\Request;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Gate;
 
 class ChirpController extends Controller
@@ -16,7 +17,20 @@ class ChirpController extends Controller
      */
     public function index()
     {
-        $chirps = Chirp::with('user')->latest()->get();
+//        $chirps = Chirp::with('user')->latest()->get();
+
+//        $chirps = Chirp::with('user')
+//            ->where('user_id','=',auth()->id())
+//            ->latest()
+//            ->get();
+
+        $chirps = Chirp::with('userVotes')
+            ->withCount([
+                'votes as likesCount' => fn(Builder $query) => $query->where('vote', '>', 0)], 'vote')
+            ->withCount([
+                'votes as dislikesCount' => fn(Builder $query) => $query->where('vote', '<', 0)], 'vote')
+            ->latest()
+            ->paginate();
 
 //        $chirps = Chirp::with('user')
 //            ->where('user_id','=',auth()->id())
